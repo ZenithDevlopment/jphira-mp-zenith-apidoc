@@ -197,24 +197,29 @@
                   "jsonSchema": {
                     "type": "object",
                     "properties": {
-                      "pool": {
-                        "description": "对应的谱池ID",
-                        "type": "integer",
-                        "x-apifox-mock": "{{$number.int}}"
+                      "type": {
+                        "description": "房间类型，默认 local",
+                        "type": "string",
+                        "enum": [
+                          "local"
+                        ],
+                        "default": "local"
                       },
-                      "isRace": {
-                        "description": "是否比赛房间",
-                        "type": "boolean",
-                        "x-apifox-mock": "{{$datatype.boolean}}"
+                      "pools": {
+                        "description": "该房间固化的谱池ID列表（至少1个），缺省使用全局 default 池",
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        },
+                        "minItems": 1
                       }
                     },
                     "required": [
-                      "isRace",
-                      "pool"
+                      "pools"
                     ],
                     "x-apifox-orders": [
-                      "isRace",
-                      "pool"
+                      "type",
+                      "pools"
                     ]
                   },
                   "required": true,
@@ -222,7 +227,7 @@
                   "examples": [
                     {
                       "mediaType": "application/json",
-                      "value": "{\r\n    \"is_race\": false, // 是否比赛房间，bool\r\n    \"pool\": 1234      // 对应的谱池ID，int32\r\n}",
+                      "value": "{\r\n    \"type\": \"local\", // 房间类型，默认 local\r\n    \"pools\": [0, 1]  // 固化谱池ID列表，至少 1 个，缺省使用全局 default 池\r\n}",
                       "name": "示例 1"
                     }
                   ],
@@ -339,7 +344,8 @@
                       },
                       "lock": {
                         "type": "boolean",
-                        "x-apifox-mock": "{{$datatype.boolean}}"
+                        "x-apifox-mock": "{{$datatype.boolean}}",
+                        "description": "已弃用：服务端不再改变 locked 状态"
                       },
                       "minPlayer": {
                         "type": "integer",
@@ -352,6 +358,26 @@
                       "chatEnable": {
                         "type": "boolean",
                         "x-apifox-mock": "{{$datatype.boolean}}"
+                      },
+                      "selectCountdown": {
+                        "type": "integer",
+                        "x-apifox-mock": "{{$number.int(min=10)}}",
+                        "description": "选谱投票倒计时（秒），最小 10，修改后下一轮生效"
+                      },
+                      "readyCountdown": {
+                        "type": "integer",
+                        "x-apifox-mock": "{{$number.int(min=1)}}",
+                        "description": "准备倒计时（秒）"
+                      },
+                      "forceFinish": {
+                        "type": "integer",
+                        "x-apifox-mock": "{{$number.int(min=1)}}",
+                        "description": "Playing 强制结束倒计时（秒）"
+                      },
+                      "interval": {
+                        "type": "integer",
+                        "x-apifox-mock": "{{$number.int(min=1)}}",
+                        "description": "谱池刷新间隔（轮数）"
                       }
                     },
                     "x-apifox-orders": [
@@ -359,7 +385,11 @@
                       "minPlayer",
                       "live",
                       "lock",
-                      "chatEnable"
+                      "chatEnable",
+                      "selectCountdown",
+                      "readyCountdown",
+                      "forceFinish",
+                      "interval"
                     ],
                     "required": [
                       "maxPlayer",
@@ -504,6 +534,688 @@
                 "inheritPostProcessors": {},
                 "inheritPreProcessors": {}
               }
+            },
+            {
+              "name": "房间列表",
+              "api": {
+                "id": "500284000",
+                "method": "get",
+                "path": "/api/v1/room/list",
+                "parameters": {},
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "500284200",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "ok": {
+                          "type": "boolean",
+                          "x-apifox-mock": "true"
+                        },
+                        "rooms": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/definitions/303663731"
+                          },
+                          "description": "房间状态快照列表"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "ok",
+                        "rooms"
+                      ],
+                      "required": [
+                        "ok",
+                        "rooms"
+                      ]
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": ""
+                  },
+                  {
+                    "id": "342355677",
+                    "referencedResponseId": 342355677
+                  },
+                  {
+                    "id": "342355679",
+                    "referencedResponseId": 342355679
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "none",
+                  "parameters": [],
+                  "required": true,
+                  "mediaType": "",
+                  "examples": [],
+                  "oasExtensions": ""
+                },
+                "description": "管理员返回全部房间；普通玩家仅返回自己所在房间（单元素数组）。",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 40,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {
+                  "342355677": true,
+                  "342355679": true
+                },
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 8371588,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "删除房间",
+              "api": {
+                "id": "500284001",
+                "method": "delete",
+                "path": "/api/v1/room/{id}",
+                "parameters": {
+                  "path": [
+                    {
+                      "id": "id#0",
+                      "name": "id",
+                      "required": true,
+                      "description": "欲删除的房间ID",
+                      "type": "string",
+                      "enable": true,
+                      "schema": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z0-9_-]{1,20}$"
+                      }
+                    }
+                  ]
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "500284201",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "ok": {
+                          "type": "boolean",
+                          "x-apifox-mock": "true"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "ok"
+                      ],
+                      "required": [
+                        "ok"
+                      ]
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": ""
+                  },
+                  {
+                    "id": "342355742",
+                    "referencedResponseId": 342355742
+                  },
+                  {
+                    "id": "342355679",
+                    "referencedResponseId": 342355679
+                  },
+                  {
+                    "id": "342355680",
+                    "referencedResponseId": 342355680
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "none",
+                  "parameters": [],
+                  "required": true,
+                  "mediaType": "",
+                  "examples": [],
+                  "oasExtensions": ""
+                },
+                "description": "仅能删除空房间；房间非空返回 400。",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 50,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {
+                  "342355679": true,
+                  "342355742": true,
+                  "342355680": true
+                },
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 8371588,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "强制结束",
+              "api": {
+                "id": "500284002",
+                "method": "post",
+                "path": "/api/v1/room/{id}/end",
+                "parameters": {
+                  "path": [
+                    {
+                      "id": "id#0",
+                      "name": "id",
+                      "required": true,
+                      "description": "欲强制结束的房间ID",
+                      "type": "string",
+                      "enable": true,
+                      "schema": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z0-9_-]{1,20}$"
+                      }
+                    }
+                  ]
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "500284202",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "ok": {
+                          "type": "boolean",
+                          "x-apifox-mock": "true"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "ok"
+                      ],
+                      "required": [
+                        "ok"
+                      ]
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": ""
+                  },
+                  {
+                    "id": "342355742",
+                    "referencedResponseId": 342355742
+                  },
+                  {
+                    "id": "342355679",
+                    "referencedResponseId": 342355679
+                  },
+                  {
+                    "id": "342355680",
+                    "referencedResponseId": 342355680
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "none",
+                  "parameters": [],
+                  "required": true,
+                  "mediaType": "",
+                  "examples": [],
+                  "oasExtensions": ""
+                },
+                "description": "强制结束该房间当前 Playing；房间不在 Playing 时返回 400。",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 60,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {
+                  "342355679": true,
+                  "342355742": true,
+                  "342355680": true
+                },
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 8371588,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "房间池状态",
+              "api": {
+                "id": "500284003",
+                "method": "get",
+                "path": "/api/v1/room/{id}/pool",
+                "parameters": {
+                  "path": [
+                    {
+                      "id": "id#0",
+                      "name": "id",
+                      "required": true,
+                      "description": "欲查询的房间ID",
+                      "type": "string",
+                      "enable": true,
+                      "schema": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z0-9_-]{1,20}$"
+                      }
+                    }
+                  ]
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "500284203",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "ok": {
+                          "type": "boolean",
+                          "x-apifox-mock": "true"
+                        },
+                        "pool": {
+                          "$ref": "#/definitions/500285003",
+                          "description": "房间谱池状态"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "ok",
+                        "pool"
+                      ],
+                      "required": [
+                        "ok",
+                        "pool"
+                      ]
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": ""
+                  },
+                  {
+                    "id": "342355677",
+                    "referencedResponseId": 342355677
+                  },
+                  {
+                    "id": "342355679",
+                    "referencedResponseId": 342355679
+                  },
+                  {
+                    "id": "342355680",
+                    "referencedResponseId": 342355680
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "none",
+                  "parameters": [],
+                  "required": true,
+                  "mediaType": "",
+                  "examples": [],
+                  "oasExtensions": ""
+                },
+                "description": "玩家仅限查询自己所在房间；管理员可查询任意房间。",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 70,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {
+                  "342355677": true,
+                  "342355679": true,
+                  "342355680": true
+                },
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 8371588,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "切换池",
+              "api": {
+                "id": "500284004",
+                "method": "put",
+                "path": "/api/v1/room/{id}/pool/switch",
+                "parameters": {
+                  "path": [
+                    {
+                      "id": "id#0",
+                      "name": "id",
+                      "required": true,
+                      "description": "欲操作房间ID",
+                      "type": "string",
+                      "enable": true,
+                      "schema": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z0-9_-]{1,20}$"
+                      }
+                    }
+                  ]
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "500284204",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "ok": {
+                          "type": "boolean",
+                          "x-apifox-mock": "true"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "ok"
+                      ],
+                      "required": [
+                        "ok"
+                      ]
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": ""
+                  },
+                  {
+                    "id": "342355742",
+                    "referencedResponseId": 342355742
+                  },
+                  {
+                    "id": "342355679",
+                    "referencedResponseId": 342355679
+                  },
+                  {
+                    "id": "342355680",
+                    "referencedResponseId": 342355680
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "application/json",
+                  "parameters": [],
+                  "jsonSchema": {
+                    "type": "object",
+                    "properties": {
+                      "poolId": {
+                        "description": "目标池ID，必须在该房间固化池列表内",
+                        "type": "integer",
+                        "x-apifox-mock": "{{$number.int}}"
+                      }
+                    },
+                    "required": [
+                      "poolId"
+                    ],
+                    "x-apifox-orders": [
+                      "poolId"
+                    ]
+                  },
+                  "required": true,
+                  "mediaType": "",
+                  "examples": [],
+                  "oasExtensions": ""
+                },
+                "description": "设置该房间 pending pool，下一次谱池刷新时生效；目标不在固化列表内返回 400。",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 80,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {
+                  "342355679": true,
+                  "342355742": true,
+                  "342355680": true
+                },
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 8371588,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "池收藏夹",
+              "api": {
+                "id": "500284005",
+                "method": "put",
+                "path": "/api/v1/room/{id}/pool/favorite",
+                "parameters": {
+                  "path": [
+                    {
+                      "id": "id#0",
+                      "name": "id",
+                      "required": true,
+                      "description": "欲操作房间ID",
+                      "type": "string",
+                      "enable": true,
+                      "schema": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z0-9_-]{1,20}$"
+                      }
+                    }
+                  ]
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "500284205",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "ok": {
+                          "type": "boolean",
+                          "x-apifox-mock": "true"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "ok"
+                      ],
+                      "required": [
+                        "ok"
+                      ]
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": ""
+                  },
+                  {
+                    "id": "342355742",
+                    "referencedResponseId": 342355742
+                  },
+                  {
+                    "id": "342355679",
+                    "referencedResponseId": 342355679
+                  },
+                  {
+                    "id": "342355680",
+                    "referencedResponseId": 342355680
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "application/json",
+                  "parameters": [],
+                  "jsonSchema": {
+                    "type": "object",
+                    "properties": {
+                      "favoriteId": {
+                        "description": "谱面收藏夹ID，null 表示清除",
+                        "type": "integer",
+                        "nullable": true,
+                        "x-apifox-mock": "{{$number.int}}"
+                      }
+                    },
+                    "required": [
+                      "favoriteId"
+                    ],
+                    "x-apifox-orders": [
+                      "favoriteId"
+                    ]
+                  },
+                  "required": true,
+                  "mediaType": "",
+                  "examples": [],
+                  "oasExtensions": ""
+                },
+                "description": "设置/清除该房间当前池的 favorite 展示，不影响全局定义，下一轮生效。",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 90,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {
+                  "342355679": true,
+                  "342355742": true,
+                  "342355680": true
+                },
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 8371588,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
             }
           ]
         },
@@ -564,7 +1276,31 @@
                     "name": "成功",
                     "jsonSchema": {
                       "type": "object",
-                      "properties": {}
+                      "properties": {
+                        "ok": {
+                          "type": "boolean",
+                          "x-apifox-mock": "true"
+                        },
+                        "token": {
+                          "type": "string",
+                          "description": "Phira 账号 Bearer Token"
+                        },
+                        "isAdmin": {
+                          "type": "boolean",
+                          "x-apifox-mock": "false",
+                          "description": "是否为管理员"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "ok",
+                        "token",
+                        "isAdmin"
+                      ],
+                      "required": [
+                        "ok",
+                        "token",
+                        "isAdmin"
+                      ]
                     },
                     "itemSchema": {},
                     "contentType": "json"
@@ -631,6 +1367,856 @@
               }
             }
           ]
+        },
+        {
+          "name": "谱池管理",
+          "id": 93198746,
+          "auth": {},
+          "securityScheme": {},
+          "parentId": 0,
+          "serverId": "",
+          "description": "",
+          "identityPattern": {
+            "httpApi": {
+              "type": "inherit",
+              "bodyType": "",
+              "fields": []
+            }
+          },
+          "shareSettings": {},
+          "visibility": "INHERITED",
+          "moduleId": 8371588,
+          "preProcessors": [
+            {
+              "id": "inheritProcessors",
+              "type": "inheritProcessors",
+              "data": {}
+            }
+          ],
+          "postProcessors": [
+            {
+              "id": "inheritProcessors",
+              "type": "inheritProcessors",
+              "data": {}
+            }
+          ],
+          "inheritPostProcessors": {},
+          "inheritPreProcessors": {},
+          "items": [
+            {
+              "name": "池列表",
+              "api": {
+                "id": "500284100",
+                "method": "get",
+                "path": "/api/v1/pool/list",
+                "parameters": {},
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "500284210",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "ok": {
+                          "type": "boolean",
+                          "x-apifox-mock": "true"
+                        },
+                        "pools": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/definitions/500285002"
+                          },
+                          "description": "全局池定义列表"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "ok",
+                        "pools"
+                      ],
+                      "required": [
+                        "ok",
+                        "pools"
+                      ]
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": ""
+                  },
+                  {
+                    "id": "342355677",
+                    "referencedResponseId": 342355677
+                  },
+                  {
+                    "id": "342355679",
+                    "referencedResponseId": 342355679
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "none",
+                  "parameters": [],
+                  "required": true,
+                  "mediaType": "",
+                  "examples": [],
+                  "oasExtensions": ""
+                },
+                "description": "管理员：获取全部全局池定义。",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 10,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {
+                  "342355677": true,
+                  "342355679": true
+                },
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 8371588,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "新增池",
+              "api": {
+                "id": "500284101",
+                "method": "post",
+                "path": "/api/v1/pool",
+                "parameters": {},
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "500284211",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "ok": {
+                          "type": "boolean",
+                          "x-apifox-mock": "true"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "ok"
+                      ],
+                      "required": [
+                        "ok"
+                      ]
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": ""
+                  },
+                  {
+                    "id": "342355742",
+                    "referencedResponseId": 342355742
+                  },
+                  {
+                    "id": "342355679",
+                    "referencedResponseId": 342355679
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "application/json",
+                  "parameters": [],
+                  "jsonSchema": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "description": "新的池ID",
+                        "type": "integer",
+                        "x-apifox-mock": "{{$number.int}}"
+                      },
+                      "chartIds": {
+                        "description": "池内谱面ID列表（至少1个），新增的谱面需要已存在或可拉取",
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        },
+                        "minItems": 1
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "chartIds"
+                    ],
+                    "x-apifox-orders": [
+                      "id",
+                      "chartIds"
+                    ]
+                  },
+                  "required": true,
+                  "mediaType": "",
+                  "examples": [],
+                  "oasExtensions": ""
+                },
+                "description": "管理员：新增全局池定义，default 默认为 false。",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 20,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {
+                  "342355742": true,
+                  "342355679": true
+                },
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 8371588,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "删除池",
+              "api": {
+                "id": "500284102",
+                "method": "delete",
+                "path": "/api/v1/pool/{id}",
+                "parameters": {
+                  "path": [
+                    {
+                      "id": "id#0",
+                      "name": "id",
+                      "required": true,
+                      "description": "欲删除的池ID",
+                      "type": "integer",
+                      "enable": true,
+                      "schema": {
+                        "type": "integer"
+                      }
+                    }
+                  ]
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "500284212",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "ok": {
+                          "type": "boolean",
+                          "x-apifox-mock": "true"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "ok"
+                      ],
+                      "required": [
+                        "ok"
+                      ]
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": ""
+                  },
+                  {
+                    "id": "342355742",
+                    "referencedResponseId": 342355742
+                  },
+                  {
+                    "id": "342355679",
+                    "referencedResponseId": 342355679
+                  },
+                  {
+                    "id": "342355680",
+                    "referencedResponseId": 342355680
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "none",
+                  "parameters": [],
+                  "required": true,
+                  "mediaType": "",
+                  "examples": [],
+                  "oasExtensions": ""
+                },
+                "description": "管理员：删除全局池定义；禁止删除最后一个池与最后一个 default 池（400）。",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 30,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {
+                  "342355742": true,
+                  "342355679": true,
+                  "342355680": true
+                },
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 8371588,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "池添加谱面",
+              "api": {
+                "id": "500284103",
+                "method": "post",
+                "path": "/api/v1/pool/{id}/chart",
+                "parameters": {
+                  "path": [
+                    {
+                      "id": "id#0",
+                      "name": "id",
+                      "required": true,
+                      "description": "目标池ID",
+                      "type": "integer",
+                      "enable": true,
+                      "schema": {
+                        "type": "integer"
+                      }
+                    }
+                  ]
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "500284213",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "ok": {
+                          "type": "boolean",
+                          "x-apifox-mock": "true"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "ok"
+                      ],
+                      "required": [
+                        "ok"
+                      ]
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": ""
+                  },
+                  {
+                    "id": "342355742",
+                    "referencedResponseId": 342355742
+                  },
+                  {
+                    "id": "342355679",
+                    "referencedResponseId": 342355679
+                  },
+                  {
+                    "id": "342355680",
+                    "referencedResponseId": 342355680
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "application/json",
+                  "parameters": [],
+                  "jsonSchema": {
+                    "type": "object",
+                    "properties": {
+                      "chartId": {
+                        "description": "要添加的谱面ID，需先可拉取 ChartInfo",
+                        "type": "integer",
+                        "x-apifox-mock": "{{$number.int}}"
+                      }
+                    },
+                    "required": [
+                      "chartId"
+                    ],
+                    "x-apifox-orders": [
+                      "chartId"
+                    ]
+                  },
+                  "required": true,
+                  "mediaType": "",
+                  "examples": [],
+                  "oasExtensions": ""
+                },
+                "description": "管理员：向全局池添加谱面。",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 40,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {
+                  "342355742": true,
+                  "342355679": true,
+                  "342355680": true
+                },
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 8371588,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "池移除谱面",
+              "api": {
+                "id": "500284104",
+                "method": "delete",
+                "path": "/api/v1/pool/{id}/chart/{chartId}",
+                "parameters": {
+                  "path": [
+                    {
+                      "id": "id#0",
+                      "name": "id",
+                      "required": true,
+                      "description": "目标池ID",
+                      "type": "integer",
+                      "enable": true,
+                      "schema": {
+                        "type": "integer"
+                      }
+                    },
+                    {
+                      "id": "chartId#0",
+                      "name": "chartId",
+                      "required": true,
+                      "description": "欲移除的谱面ID",
+                      "type": "integer",
+                      "enable": true,
+                      "schema": {
+                        "type": "integer"
+                      }
+                    }
+                  ]
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "500284214",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "ok": {
+                          "type": "boolean",
+                          "x-apifox-mock": "true"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "ok"
+                      ],
+                      "required": [
+                        "ok"
+                      ]
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": ""
+                  },
+                  {
+                    "id": "342355742",
+                    "referencedResponseId": 342355742
+                  },
+                  {
+                    "id": "342355679",
+                    "referencedResponseId": 342355679
+                  },
+                  {
+                    "id": "342355680",
+                    "referencedResponseId": 342355680
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "none",
+                  "parameters": [],
+                  "required": true,
+                  "mediaType": "",
+                  "examples": [],
+                  "oasExtensions": ""
+                },
+                "description": "管理员：从全局池移除谱面；不允许产生空池（400）。",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 50,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {
+                  "342355742": true,
+                  "342355679": true,
+                  "342355680": true
+                },
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 8371588,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "池收藏夹",
+              "api": {
+                "id": "500284105",
+                "method": "put",
+                "path": "/api/v1/pool/{id}/favorite",
+                "parameters": {
+                  "path": [
+                    {
+                      "id": "id#0",
+                      "name": "id",
+                      "required": true,
+                      "description": "目标池ID",
+                      "type": "integer",
+                      "enable": true,
+                      "schema": {
+                        "type": "integer"
+                      }
+                    }
+                  ]
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "500284215",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "ok": {
+                          "type": "boolean",
+                          "x-apifox-mock": "true"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "ok"
+                      ],
+                      "required": [
+                        "ok"
+                      ]
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": ""
+                  },
+                  {
+                    "id": "342355742",
+                    "referencedResponseId": 342355742
+                  },
+                  {
+                    "id": "342355679",
+                    "referencedResponseId": 342355679
+                  },
+                  {
+                    "id": "342355680",
+                    "referencedResponseId": 342355680
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "application/json",
+                  "parameters": [],
+                  "jsonSchema": {
+                    "type": "object",
+                    "properties": {
+                      "favoriteId": {
+                        "description": "谱面收藏夹ID，null 表示清除",
+                        "type": "integer",
+                        "nullable": true,
+                        "x-apifox-mock": "{{$number.int}}"
+                      }
+                    },
+                    "required": [
+                      "favoriteId"
+                    ],
+                    "x-apifox-orders": [
+                      "favoriteId"
+                    ]
+                  },
+                  "required": true,
+                  "mediaType": "",
+                  "examples": [],
+                  "oasExtensions": ""
+                },
+                "description": "管理员：设置/清除全局池定义的 favorite_id。",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 60,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {
+                  "342355742": true,
+                  "342355679": true,
+                  "342355680": true
+                },
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 8371588,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "池默认标志",
+              "api": {
+                "id": "500284106",
+                "method": "put",
+                "path": "/api/v1/pool/{id}/default",
+                "parameters": {
+                  "path": [
+                    {
+                      "id": "id#0",
+                      "name": "id",
+                      "required": true,
+                      "description": "目标池ID",
+                      "type": "integer",
+                      "enable": true,
+                      "schema": {
+                        "type": "integer"
+                      }
+                    }
+                  ]
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "500284216",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "ok": {
+                          "type": "boolean",
+                          "x-apifox-mock": "true"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "ok"
+                      ],
+                      "required": [
+                        "ok"
+                      ]
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": ""
+                  },
+                  {
+                    "id": "342355742",
+                    "referencedResponseId": 342355742
+                  },
+                  {
+                    "id": "342355679",
+                    "referencedResponseId": 342355679
+                  },
+                  {
+                    "id": "342355680",
+                    "referencedResponseId": 342355680
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "application/json",
+                  "parameters": [],
+                  "jsonSchema": {
+                    "type": "object",
+                    "properties": {
+                      "enabled": {
+                        "description": "是否设为默认启用池",
+                        "type": "boolean",
+                        "x-apifox-mock": "{{$datatype.boolean}}"
+                      }
+                    },
+                    "required": [
+                      "enabled"
+                    ],
+                    "x-apifox-orders": [
+                      "enabled"
+                    ]
+                  },
+                  "required": true,
+                  "mediaType": "",
+                  "examples": [],
+                  "oasExtensions": ""
+                },
+                "description": "管理员：设置/清除全局池的 default 标志。",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 70,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {
+                  "342355742": true,
+                  "342355679": true,
+                  "342355680": true
+                },
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 8371588,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            }
+          ]
         }
       ]
     }
@@ -646,7 +2232,18 @@
           "id": 9308132,
           "name": "房间定义",
           "sidebarTitle": "",
-          "content": "### 房间相关\n\n1. 创建房间之后的谱池将会固化，不可修改，如要修改，需要把房间滚出去重新创建一个\n2. 没有解散房间逻辑，没有\n3. 房间没有人员时，自动销毁\n4. 房间ID定义 `^[A-Za-z0-9_-]{1,20}$`\n5. 默认房间玩家上限 `1000`",
+          "content": "### 房间相关\n\n1. 创建房间之后的谱池将会固化，不可修改，如要修改，需要把房间滚出去重新创建一个\n2. 没有解散房间逻辑，没有\n3. 房间没有人员时，自动销毁\n4. 房间ID定义 `^[A-Za-z0-9_-]{1,20}$`\n5. 默认房间玩家上限 `1000`\n6. 房间类型当前仅 `local`，创建房间时通过 `type` 指定，默认 `local`\n7. 房间配置（minPlayer / maxPlayer / selectCountdown / readyCountdown / forceFinish / interval）可通过更新房间接口按房间调整，selectCountdown 修改后下一轮生效\n8. 房间固化池列表创建后不可修改；当前池每 `interval` 轮在固化列表内按 id 排序循环切换；切换目标必须在该房间固化列表内\n9. 房间当前池的 favorite 展示可被房间级覆盖，不影响全局定义，下一轮生效",
+          "folderId": 0,
+          "type": "",
+          "tags": [],
+          "visibility": "INHERITED",
+          "moduleId": 8371588
+        },
+        {
+          "id": 9308133,
+          "name": "权限与管理员",
+          "sidebarTitle": "",
+          "content": "### 权限与管理员\n\n1. 玩家与管理员均使用 Phira 账号登录（POST /api/v1/login），返回 Bearer Token 与 isAdmin\n2. 管理员名单由服务器独立配置文件决定，与玩家登录无关\n3. 普通玩家仅可查询自己所在房间的状态与谱池\n4. 创建/删除/配置/强制结束/池管理等写操作均需管理员权限，否则 403\n5. 未登录返回 401",
           "folderId": 0,
           "type": "",
           "tags": [],
@@ -893,6 +2490,18 @@
                 },
                 "chart": {
                   "$ref": "#/definitions/303664780"
+                },
+                "type": {
+                  "description": "房间类型",
+                  "$ref": "#/definitions/500285001"
+                },
+                "config": {
+                  "description": "房间配置",
+                  "$ref": "#/definitions/500285004"
+                },
+                "pool": {
+                  "description": "房间谱池状态",
+                  "$ref": "#/definitions/500285003"
                 }
               },
               "required": [
@@ -903,7 +2512,10 @@
                 "cycle",
                 "players",
                 "monitors",
-                "chart"
+                "chart",
+                "type",
+                "config",
+                "pool"
               ],
               "definitions": {
                 "RoomGameState": {
@@ -945,6 +2557,9 @@
                 "cycle",
                 "host",
                 "chart",
+                "type",
+                "config",
+                "pool",
                 "players",
                 "monitors"
               ]
@@ -1258,6 +2873,188 @@
             "jsonSchema": {
               "type": "string",
               "pattern": "^[A-Za-z0-9_-]{1,20}$"
+            }
+          },
+          "visibility": "INHERITED",
+          "moduleId": 8371588
+        },
+        {
+          "name": "房间类型",
+          "displayName": "",
+          "id": "#/definitions/500285001",
+          "description": "",
+          "schema": {
+            "jsonSchema": {
+              "type": "string",
+              "enum": [
+                "local"
+              ],
+              "x-apifox-enum": [
+                {
+                  "value": "local",
+                  "name": "本地标准房间",
+                  "description": ""
+                }
+              ]
+            }
+          },
+          "visibility": "INHERITED",
+          "moduleId": 8371588
+        },
+        {
+          "name": "谱池快照",
+          "displayName": "",
+          "id": "#/definitions/500285002",
+          "description": "",
+          "schema": {
+            "jsonSchema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "description": "池ID"
+                },
+                "favoriteId": {
+                  "type": "integer",
+                  "nullable": true,
+                  "description": "谱面收藏夹ID，可为空"
+                },
+                "default": {
+                  "type": "boolean",
+                  "description": "是否为默认启用池"
+                },
+                "chartIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  },
+                  "description": "池内谱面ID列表"
+                }
+              },
+              "required": [
+                "id",
+                "default",
+                "chartIds"
+              ],
+              "x-apifox-orders": [
+                "id",
+                "favoriteId",
+                "default",
+                "chartIds"
+              ]
+            }
+          },
+          "visibility": "INHERITED",
+          "moduleId": 8371588
+        },
+        {
+          "name": "房间谱池状态",
+          "displayName": "",
+          "id": "#/definitions/500285003",
+          "description": "",
+          "schema": {
+            "jsonSchema": {
+              "type": "object",
+              "properties": {
+                "currentPool": {
+                  "$ref": "#/definitions/500285002",
+                  "description": "当前池"
+                },
+                "pools": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/500285002"
+                  },
+                  "description": "固化池列表（创建后不可修改）"
+                },
+                "pendingPoolId": {
+                  "type": "integer",
+                  "nullable": true,
+                  "description": "pending 池ID"
+                },
+                "favoriteId": {
+                  "type": "integer",
+                  "nullable": true,
+                  "description": "当前池展示的收藏夹ID（可被房间覆盖）"
+                },
+                "finishedRoundsSinceRefresh": {
+                  "type": "integer",
+                  "description": "距上次刷新的已完成轮数"
+                },
+                "refreshIntervalRounds": {
+                  "type": "integer",
+                  "description": "刷新间隔轮数"
+                }
+              },
+              "required": [
+                "currentPool",
+                "pools",
+                "finishedRoundsSinceRefresh",
+                "refreshIntervalRounds"
+              ],
+              "x-apifox-orders": [
+                "currentPool",
+                "pools",
+                "pendingPoolId",
+                "favoriteId",
+                "finishedRoundsSinceRefresh",
+                "refreshIntervalRounds"
+              ]
+            }
+          },
+          "visibility": "INHERITED",
+          "moduleId": 8371588
+        },
+        {
+          "name": "房间配置",
+          "displayName": "",
+          "id": "#/definitions/500285004",
+          "description": "",
+          "schema": {
+            "jsonSchema": {
+              "type": "object",
+              "properties": {
+                "minPlayer": {
+                  "type": "integer",
+                  "description": "最低开局人数"
+                },
+                "maxPlayer": {
+                  "type": "integer",
+                  "description": "房间容量上限"
+                },
+                "selectCountdown": {
+                  "type": "integer",
+                  "description": "选谱投票倒计时（秒）"
+                },
+                "readyCountdown": {
+                  "type": "integer",
+                  "description": "准备倒计时（秒）"
+                },
+                "forceFinish": {
+                  "type": "integer",
+                  "description": "Playing 强制结束倒计时（秒）"
+                },
+                "interval": {
+                  "type": "integer",
+                  "description": "谱池刷新间隔（轮数）"
+                }
+              },
+              "required": [
+                "minPlayer",
+                "maxPlayer",
+                "selectCountdown",
+                "readyCountdown",
+                "forceFinish",
+                "interval"
+              ],
+              "x-apifox-orders": [
+                "minPlayer",
+                "maxPlayer",
+                "selectCountdown",
+                "readyCountdown",
+                "forceFinish",
+                "interval"
+              ]
             }
           },
           "visibility": "INHERITED",
