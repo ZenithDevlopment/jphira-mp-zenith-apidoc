@@ -2525,16 +2525,6 @@
                 "pool"
               ],
               "definitions": {
-                "RoomGameState": {
-                  "type": "string",
-                  "enum": [
-                    "WAITING",
-                    "PLAYING",
-                    "ENDED",
-                    "PAUSED"
-                  ],
-                  "description": "房间游戏状态枚举"
-                },
                 "Player": {
                   "type": "object",
                   "properties": {
