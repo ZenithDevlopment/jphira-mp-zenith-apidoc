@@ -2226,6 +2226,2333 @@
                 "inheritPostProcessors": {},
                 "inheritPreProcessors": {}
               }
+            },
+            {
+              "name": "更新池",
+              "api": {
+                "id": "500290006",
+                "method": "put",
+                "path": "/api/v1/pool/{id}",
+                "parameters": {
+                  "path": [
+                    {
+                      "id": "500290001#0",
+                      "name": "id",
+                      "required": true,
+                      "description": "目标池ID",
+                      "type": "integer",
+                      "enable": true,
+                      "schema": {
+                        "type": "integer"
+                      }
+                    }
+                  ]
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "500290002",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "ok": {
+                          "type": "boolean"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "ok"
+                      ]
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": "",
+                    "commonResponseStatus": {
+                      "342355676": true
+                    }
+                  },
+                  {
+                    "id": "500290003",
+                    "referencedResponseId": 342355742
+                  },
+                  {
+                    "id": "500290004",
+                    "referencedResponseId": 342355677
+                  },
+                  {
+                    "id": "500290005",
+                    "referencedResponseId": 342355679
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "application/json",
+                  "parameters": [],
+                  "jsonSchema": {
+                    "type": "object",
+                    "properties": {
+                      "category": {
+                        "type": "string",
+                        "enum": [
+                          "REGULAR",
+                          "CONFIGURED",
+                          "TB",
+                          "MANUAL"
+                        ],
+                        "description": "池类别，决定轮换与展示"
+                      },
+                      "sizeLimit": {
+                        "type": "integer",
+                        "description": "目标容量，负数清空"
+                      },
+                      "roundsPerStay": {
+                        "type": "integer",
+                        "description": "停留轮数，负数清空（恢复为跟随房间 interval）"
+                      },
+                      "order": {
+                        "type": "integer",
+                        "description": "轮换顺序，0 表示按 ID"
+                      },
+                      "submissionOpen": {
+                        "type": "boolean",
+                        "description": "是否允许玩家向该池投稿"
+                      }
+                    },
+                    "x-apifox-orders": [
+                      "category",
+                      "sizeLimit",
+                      "roundsPerStay",
+                      "order",
+                      "submissionOpen"
+                    ]
+                  },
+                  "required": true,
+                  "mediaType": "",
+                  "examples": [],
+                  "oasExtensions": ""
+                },
+                "description": "管理员：更新池的类别、容量、停留轮数与轮换顺序。字段缺省表示不修改；传负数表示清空该字段（恢复默认）。",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 80,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {
+                  "342355676": true,
+                  "342355742": true,
+                  "342355677": true,
+                  "342355679": true
+                },
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 8371588,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "池批量添加谱面",
+              "api": {
+                "id": "500290012",
+                "method": "post",
+                "path": "/api/v1/pool/{id}/charts",
+                "parameters": {
+                  "path": [
+                    {
+                      "id": "500290007#0",
+                      "name": "id",
+                      "required": true,
+                      "description": "目标池ID",
+                      "type": "integer",
+                      "enable": true,
+                      "schema": {
+                        "type": "integer"
+                      }
+                    }
+                  ]
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "500290008",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "ok": {
+                          "type": "boolean"
+                        },
+                        "added": {
+                          "type": "integer",
+                          "description": "实际新增数量"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "ok",
+                        "added"
+                      ],
+                      "required": [
+                        "ok",
+                        "added"
+                      ]
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": "",
+                    "commonResponseStatus": {
+                      "342355676": true
+                    }
+                  },
+                  {
+                    "id": "500290009",
+                    "referencedResponseId": 342355742
+                  },
+                  {
+                    "id": "500290010",
+                    "referencedResponseId": 342355677
+                  },
+                  {
+                    "id": "500290011",
+                    "referencedResponseId": 342355679
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "application/json",
+                  "parameters": [],
+                  "jsonSchema": {
+                    "type": "object",
+                    "properties": {
+                      "chartIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        },
+                        "description": "谱面ID列表（至少1个）"
+                      }
+                    },
+                    "x-apifox-orders": [
+                      "chartIds"
+                    ],
+                    "required": [
+                      "chartIds"
+                    ]
+                  },
+                  "required": true,
+                  "mediaType": "",
+                  "examples": [],
+                  "oasExtensions": ""
+                },
+                "description": "管理员：一次提交多张谱面，幂等（已存在的会跳过），整批只落盘一次。",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 90,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {
+                  "342355676": true,
+                  "342355742": true,
+                  "342355677": true,
+                  "342355679": true
+                },
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 8371588,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "批量新建空池",
+              "api": {
+                "id": "500299001",
+                "method": "post",
+                "path": "/api/v1/pool/batch",
+                "parameters": {},
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "500290008",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "ok": {
+                          "type": "boolean"
+                        },
+                        "poolIds": {
+                          "type": "array",
+                          "items": {
+                            "type": "integer"
+                          },
+                          "description": "新建的池 ID"
+                        }
+                      },
+                      "required": [
+                        "ok",
+                        "poolIds"
+                      ],
+                      "x-apifox-orders": [
+                        "ok",
+                        "poolIds"
+                      ]
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": "",
+                    "commonResponseStatus": {
+                      "342355676": true
+                    }
+                  },
+                  {
+                    "id": "500290009",
+                    "referencedResponseId": 342355742
+                  },
+                  {
+                    "id": "500290010",
+                    "referencedResponseId": 342355677
+                  },
+                  {
+                    "id": "500290011",
+                    "referencedResponseId": 342355679
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "application/json",
+                  "parameters": [],
+                  "jsonSchema": {
+                    "type": "object",
+                    "properties": {
+                      "count": {
+                        "type": "integer",
+                        "description": "创建数量，1~50"
+                      },
+                      "category": {
+                        "type": "string",
+                        "enum": [
+                          "REGULAR",
+                          "CONFIGURED",
+                          "TB",
+                          "MANUAL"
+                        ],
+                        "description": "池类别"
+                      },
+                      "sizeLimit": {
+                        "type": "integer",
+                        "description": "每池谱面数，可空"
+                      },
+                      "roundsPerStay": {
+                        "type": "integer",
+                        "description": "停留轮数，可空则跟随房间"
+                      }
+                    },
+                    "required": [
+                      "count"
+                    ],
+                    "x-apifox-orders": [
+                      "count",
+                      "category",
+                      "sizeLimit",
+                      "roundsPerStay"
+                    ]
+                  },
+                  "required": true,
+                  "mediaType": "",
+                  "examples": [],
+                  "oasExtensions": ""
+                },
+                "description": "管理员：一次创建多个空池，ID 由服务端分配以避免客户端冲突。单次上限 50 个。",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 85,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {
+                  "342355676": true,
+                  "342355742": true,
+                  "342355677": true,
+                  "342355679": true
+                },
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 8371588,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "谱面筛选",
+              "api": {
+                "id": "500290026",
+                "method": "get",
+                "path": "/api/v1/chart/search",
+                "parameters": {
+                  "query": [
+                    {
+                      "id": "500290013#0",
+                      "name": "category",
+                      "required": false,
+                      "description": "REGULAR / CONFIGURED / TB / MANUAL，大小写不敏感",
+                      "type": "string",
+                      "enable": true
+                    },
+                    {
+                      "id": "500290014#0",
+                      "name": "tag",
+                      "required": false,
+                      "description": "逗号分隔的标签覆盖，例如 plain",
+                      "type": "string",
+                      "enable": true
+                    },
+                    {
+                      "id": "500290015#0",
+                      "name": "minRating",
+                      "required": false,
+                      "description": "评分下限，0~1 归一化，例如 0.84",
+                      "type": "string",
+                      "enable": true
+                    },
+                    {
+                      "id": "500290016#0",
+                      "name": "minRatingCount",
+                      "required": false,
+                      "description": "评分人数下限，例如 5",
+                      "type": "string",
+                      "enable": true
+                    },
+                    {
+                      "id": "500290017#0",
+                      "name": "minDifficulty",
+                      "required": false,
+                      "description": "定数下限，例如 17",
+                      "type": "string",
+                      "enable": true
+                    },
+                    {
+                      "id": "500290018#0",
+                      "name": "minDuration",
+                      "required": false,
+                      "description": "时长下限（秒），例如 360",
+                      "type": "string",
+                      "enable": true
+                    },
+                    {
+                      "id": "500290019#0",
+                      "name": "limit",
+                      "required": false,
+                      "description": "返回条数，默认 50",
+                      "type": "string",
+                      "enable": true
+                    },
+                    {
+                      "id": "500290020#0",
+                      "name": "refresh",
+                      "required": false,
+                      "description": "存在即触发后台增量拉取目录",
+                      "type": "string",
+                      "enable": true
+                    },
+                    {
+                      "id": "500290021#0",
+                      "name": "division",
+                      "required": false,
+                      "description": "填 plain 时只拉纯配置谱面",
+                      "type": "string",
+                      "enable": true
+                    }
+                  ]
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "500290022",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "ok": {
+                          "type": "boolean"
+                        },
+                        "result": {
+                          "type": "object",
+                          "properties": {
+                            "indexed": {
+                              "type": "integer"
+                            },
+                            "remoteTotal": {
+                              "type": "integer",
+                              "nullable": true
+                            },
+                            "refreshing": {
+                              "type": "boolean"
+                            },
+                            "matched": {
+                              "type": "integer"
+                            },
+                            "charts": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "#/definitions/303664780"
+                              },
+                              "description": "命中的谱面，按评分降序"
+                            }
+                          },
+                          "x-apifox-orders": [
+                            "indexed",
+                            "remoteTotal",
+                            "refreshing",
+                            "matched",
+                            "charts"
+                          ],
+                          "required": [
+                            "indexed",
+                            "matched",
+                            "charts"
+                          ]
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "ok",
+                        "result"
+                      ],
+                      "required": [
+                        "ok",
+                        "result"
+                      ]
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": "",
+                    "commonResponseStatus": {
+                      "342355676": true
+                    }
+                  },
+                  {
+                    "id": "500290023",
+                    "referencedResponseId": 342355742
+                  },
+                  {
+                    "id": "500290024",
+                    "referencedResponseId": 342355677
+                  },
+                  {
+                    "id": "500290025",
+                    "referencedResponseId": 342355679
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "none",
+                  "parameters": [],
+                  "required": true,
+                  "mediaType": "",
+                  "examples": [],
+                  "oasExtensions": ""
+                },
+                "description": "管理员：按类别规则筛选全站谱面。索引为空时先调用 refresh。Phira 隐藏 plain 谱面于默认列表，服务端会在索引没有 pure 谱面时先拉一次。",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 110,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {
+                  "342355676": true,
+                  "342355742": true,
+                  "342355677": true,
+                  "342355679": true
+                },
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 8371588,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "按规则生成池",
+              "api": {
+                "id": "500290031",
+                "method": "post",
+                "path": "/api/v1/pool/generate",
+                "parameters": {},
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "500290027",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "ok": {
+                          "type": "boolean"
+                        },
+                        "poolIds": {
+                          "type": "array",
+                          "items": {
+                            "type": "integer"
+                          },
+                          "description": "新建的池 ID"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "ok",
+                        "poolIds"
+                      ],
+                      "required": [
+                        "ok",
+                        "poolIds"
+                      ]
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": "",
+                    "commonResponseStatus": {
+                      "342355676": true
+                    }
+                  },
+                  {
+                    "id": "500290028",
+                    "referencedResponseId": 342355742
+                  },
+                  {
+                    "id": "500290029",
+                    "referencedResponseId": 342355677
+                  },
+                  {
+                    "id": "500290030",
+                    "referencedResponseId": 342355679
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "application/json",
+                  "parameters": [],
+                  "jsonSchema": {
+                    "type": "object",
+                    "properties": {
+                      "category": {
+                        "type": "string",
+                        "enum": [
+                          "REGULAR",
+                          "CONFIGURED",
+                          "TB"
+                        ],
+                        "description": "要生成的池类别"
+                      },
+                      "sizeLimit": {
+                        "type": "integer",
+                        "description": "每个池的谱面数，默认 15"
+                      },
+                      "roundsPerStay": {
+                        "type": "integer",
+                        "description": "生成的池各自的停留轮数"
+                      },
+                      "probeDuration": {
+                        "type": "integer",
+                        "description": "仅 TB 有效：最多探测多少首的时长"
+                      }
+                    },
+                    "x-apifox-orders": [
+                      "category",
+                      "sizeLimit",
+                      "roundsPerStay",
+                      "probeDuration"
+                    ],
+                    "required": [
+                      "category"
+                    ]
+                  },
+                  "required": true,
+                  "mediaType": "",
+                  "examples": [],
+                  "oasExtensions": ""
+                },
+                "description": "管理员：把符合类别规则的谱面按 sizeLimit 切分为多个池，追加到现有池之后。TB 需要时长，可用 probeDuration 指定探测预算；每首探测两次请求。",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 120,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {
+                  "342355676": true,
+                  "342355742": true,
+                  "342355677": true,
+                  "342355679": true
+                },
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 8371588,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "探测谱面时长",
+              "api": {
+                "id": "500290036",
+                "method": "post",
+                "path": "/api/v1/chart/duration",
+                "parameters": {},
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "500290032",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "ok": {
+                          "type": "boolean"
+                        },
+                        "probed": {
+                          "type": "integer"
+                        },
+                        "charts": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/definitions/303664780"
+                          },
+                          "description": "探测后的谱面"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "ok",
+                        "probed",
+                        "charts"
+                      ],
+                      "required": [
+                        "ok",
+                        "probed",
+                        "charts"
+                      ]
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": "",
+                    "commonResponseStatus": {
+                      "342355676": true
+                    }
+                  },
+                  {
+                    "id": "500290033",
+                    "referencedResponseId": 342355742
+                  },
+                  {
+                    "id": "500290034",
+                    "referencedResponseId": 342355677
+                  },
+                  {
+                    "id": "500290035",
+                    "referencedResponseId": 342355679
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "application/json",
+                  "parameters": [],
+                  "jsonSchema": {
+                    "type": "object",
+                    "properties": {
+                      "chartIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        },
+                        "description": "要探测的谱面ID，需已在索引中"
+                      }
+                    },
+                    "x-apifox-orders": [
+                      "chartIds"
+                    ],
+                    "required": [
+                      "chartIds"
+                    ]
+                  },
+                  "required": true,
+                  "mediaType": "",
+                  "examples": [],
+                  "oasExtensions": ""
+                },
+                "description": "管理员：从谱面归档里的音频解析时长并写入索引。并发执行，结果持久化。",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 130,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {
+                  "342355676": true,
+                  "342355742": true,
+                  "342355677": true,
+                  "342355679": true
+                },
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 8371588,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "管理员管理",
+          "id": 500290053,
+          "auth": {},
+          "securityScheme": {},
+          "parentId": 0,
+          "serverId": "",
+          "description": "",
+          "identityPattern": {
+            "httpApi": {
+              "type": "inherit",
+              "bodyType": "",
+              "fields": []
+            }
+          },
+          "shareSettings": {},
+          "visibility": "INHERITED",
+          "moduleId": 8371588,
+          "preProcessors": [
+            {
+              "id": "inheritProcessors",
+              "type": "inheritProcessors",
+              "data": {}
+            }
+          ],
+          "postProcessors": [
+            {
+              "id": "inheritProcessors",
+              "type": "inheritProcessors",
+              "data": {}
+            }
+          ],
+          "inheritPostProcessors": {},
+          "inheritPreProcessors": {},
+          "ordering": 10,
+          "items": [
+            {
+              "name": "管理员列表",
+              "api": {
+                "id": "500290041",
+                "method": "get",
+                "path": "/api/v1/admin",
+                "parameters": {},
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "500290037",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "ok": {
+                          "type": "boolean"
+                        },
+                        "admins": {
+                          "type": "array",
+                          "items": {
+                            "type": "integer"
+                          },
+                          "description": "管理员用户ID"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "ok",
+                        "admins"
+                      ],
+                      "required": [
+                        "ok",
+                        "admins"
+                      ]
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": "",
+                    "commonResponseStatus": {
+                      "342355676": true
+                    }
+                  },
+                  {
+                    "id": "500290038",
+                    "referencedResponseId": 342355742
+                  },
+                  {
+                    "id": "500290039",
+                    "referencedResponseId": 342355677
+                  },
+                  {
+                    "id": "500290040",
+                    "referencedResponseId": 342355679
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "none",
+                  "parameters": [],
+                  "required": true,
+                  "mediaType": "",
+                  "examples": [],
+                  "oasExtensions": ""
+                },
+                "description": "管理员：返回管理员名单（Phira 用户 ID 数组）。用户名需另行调用 Phira 的 /user/{id}。",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 10,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {
+                  "342355676": true,
+                  "342355742": true,
+                  "342355677": true,
+                  "342355679": true
+                },
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 8371588,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "添加管理员",
+              "api": {
+                "id": "500290046",
+                "method": "post",
+                "path": "/api/v1/admin",
+                "parameters": {},
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "500290042",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "ok": {
+                          "type": "boolean"
+                        },
+                        "added": {
+                          "type": "boolean",
+                          "description": "false 表示原本就在名单里"
+                        },
+                        "admins": {
+                          "type": "array",
+                          "items": {
+                            "type": "integer"
+                          },
+                          "description": "更新后的完整名单"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "ok",
+                        "added",
+                        "admins"
+                      ],
+                      "required": [
+                        "ok",
+                        "added",
+                        "admins"
+                      ]
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": "",
+                    "commonResponseStatus": {
+                      "342355676": true
+                    }
+                  },
+                  {
+                    "id": "500290043",
+                    "referencedResponseId": 342355742
+                  },
+                  {
+                    "id": "500290044",
+                    "referencedResponseId": 342355677
+                  },
+                  {
+                    "id": "500290045",
+                    "referencedResponseId": 342355679
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "application/json",
+                  "parameters": [],
+                  "jsonSchema": {
+                    "type": "object",
+                    "properties": {
+                      "userId": {
+                        "type": "integer",
+                        "description": "Phira 用户ID"
+                      }
+                    },
+                    "x-apifox-orders": [
+                      "userId"
+                    ],
+                    "required": [
+                      "userId"
+                    ]
+                  },
+                  "required": true,
+                  "mediaType": "",
+                  "examples": [],
+                  "oasExtensions": ""
+                },
+                "description": "管理员：把某个 Phira 用户加入名单。名单存于 data/admins.json，立即生效，无需重启。",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 20,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {
+                  "342355676": true,
+                  "342355742": true,
+                  "342355677": true,
+                  "342355679": true
+                },
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 8371588,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "移除管理员",
+              "api": {
+                "id": "500290052",
+                "method": "delete",
+                "path": "/api/v1/admin/{userId}",
+                "parameters": {
+                  "path": [
+                    {
+                      "id": "500290047#0",
+                      "name": "userId",
+                      "required": true,
+                      "description": "要移除的 Phira 用户ID",
+                      "type": "integer",
+                      "enable": true,
+                      "schema": {
+                        "type": "integer"
+                      }
+                    }
+                  ]
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "500290048",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "ok": {
+                          "type": "boolean"
+                        },
+                        "removed": {
+                          "type": "boolean"
+                        },
+                        "admins": {
+                          "type": "array",
+                          "items": {
+                            "type": "integer"
+                          },
+                          "description": "更新后的完整名单"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "ok",
+                        "removed",
+                        "admins"
+                      ],
+                      "required": [
+                        "ok",
+                        "removed",
+                        "admins"
+                      ]
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": "",
+                    "commonResponseStatus": {
+                      "342355676": true
+                    }
+                  },
+                  {
+                    "id": "500290049",
+                    "referencedResponseId": 342355742
+                  },
+                  {
+                    "id": "500290050",
+                    "referencedResponseId": 342355677
+                  },
+                  {
+                    "id": "500290051",
+                    "referencedResponseId": 342355679
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "none",
+                  "parameters": [],
+                  "required": true,
+                  "mediaType": "",
+                  "examples": [],
+                  "oasExtensions": ""
+                },
+                "description": "管理员：从名单移除。服务端拒绝移除最后一名管理员（400）。",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 30,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {
+                  "342355676": true,
+                  "342355742": true,
+                  "342355677": true,
+                  "342355679": true
+                },
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 8371588,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "谱面投稿",
+          "id": 500310001,
+          "auth": {},
+          "securityScheme": {},
+          "parentId": 0,
+          "serverId": "",
+          "description": "",
+          "identityPattern": {
+            "httpApi": {
+              "type": "inherit",
+              "bodyType": "",
+              "fields": []
+            }
+          },
+          "shareSettings": {},
+          "visibility": "INHERITED",
+          "moduleId": 8371588,
+          "preProcessors": [
+            {
+              "id": "inheritProcessors",
+              "type": "inheritProcessors",
+              "data": {}
+            }
+          ],
+          "postProcessors": [
+            {
+              "id": "inheritProcessors",
+              "type": "inheritProcessors",
+              "data": {}
+            }
+          ],
+          "inheritPostProcessors": {},
+          "inheritPreProcessors": {},
+          "ordering": 20,
+          "items": [
+            {
+              "name": "可投稿的谱池",
+              "api": {
+                "id": "500310006",
+                "method": "get",
+                "path": "/api/v1/submission/open-pools",
+                "parameters": {},
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "500310002",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "ok": {
+                          "type": "boolean"
+                        },
+                        "pools": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/definitions/500285002"
+                          },
+                          "description": "开放投稿的池"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "ok",
+                        "pools"
+                      ],
+                      "required": [
+                        "ok",
+                        "pools"
+                      ]
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": "",
+                    "commonResponseStatus": {
+                      "342355676": true
+                    }
+                  },
+                  {
+                    "id": "500310003",
+                    "referencedResponseId": 342355742
+                  },
+                  {
+                    "id": "500310004",
+                    "referencedResponseId": 342355677
+                  },
+                  {
+                    "id": "500310005",
+                    "referencedResponseId": 342355679
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "none",
+                  "parameters": [],
+                  "required": true,
+                  "mediaType": "",
+                  "examples": [],
+                  "oasExtensions": ""
+                },
+                "description": "任意登录用户：列出开启了投稿的谱池。",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 10,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {
+                  "342355676": true,
+                  "342355742": true,
+                  "342355677": true,
+                  "342355679": true
+                },
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 8371588,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": {},
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "提交投稿",
+              "api": {
+                "id": "500310012",
+                "method": "post",
+                "path": "/api/v1/pool/{id}/submissions",
+                "parameters": {
+                  "path": [
+                    {
+                      "id": "500310007#0",
+                      "name": "id",
+                      "required": true,
+                      "description": "目标池ID",
+                      "type": "integer",
+                      "enable": true,
+                      "schema": {
+                        "type": "integer"
+                      }
+                    }
+                  ]
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "500310008",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "ok": {
+                          "type": "boolean"
+                        },
+                        "accepted": {
+                          "type": "integer",
+                          "description": "被接受的数量"
+                        },
+                        "results": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "chartId": {
+                                "type": "integer"
+                              },
+                              "accepted": {
+                                "type": "boolean"
+                              },
+                              "reason": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "未被接受的原因"
+                              }
+                            },
+                            "x-apifox-orders": [
+                              "chartId",
+                              "accepted",
+                              "reason"
+                            ],
+                            "required": [
+                              "chartId",
+                              "accepted"
+                            ]
+                          },
+                          "description": "逐张结果，顺序与请求一致"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "ok",
+                        "accepted",
+                        "results"
+                      ],
+                      "required": [
+                        "ok",
+                        "accepted",
+                        "results"
+                      ]
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": "",
+                    "commonResponseStatus": {
+                      "342355676": true
+                    }
+                  },
+                  {
+                    "id": "500310009",
+                    "referencedResponseId": 342355742
+                  },
+                  {
+                    "id": "500310010",
+                    "referencedResponseId": 342355677
+                  },
+                  {
+                    "id": "500310011",
+                    "referencedResponseId": 342355679
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "application/json",
+                  "parameters": [],
+                  "jsonSchema": {
+                    "type": "object",
+                    "properties": {
+                      "chartIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        },
+                        "description": "谱面ID列表，最多 20 个"
+                      }
+                    },
+                    "x-apifox-orders": [
+                      "chartIds"
+                    ],
+                    "required": [
+                      "chartIds"
+                    ]
+                  },
+                  "required": true,
+                  "mediaType": "",
+                  "examples": [],
+                  "oasExtensions": ""
+                },
+                "description": "登录即可（非管理员也行）。要求该池 submissionOpen 为 true，谱面必须已在服务端索引里。同一玩家对同一张谱面在同一池只能投一次；不同玩家投同一张会合并到同一条记录。单次最多 20 张。",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 20,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {
+                  "342355676": true,
+                  "342355742": true,
+                  "342355677": true,
+                  "342355679": true
+                },
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 8371588,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": {},
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "撤回投稿",
+              "api": {
+                "id": "500310019",
+                "method": "delete",
+                "path": "/api/v1/pool/{id}/submissions/{chartId}",
+                "parameters": {
+                  "path": [
+                    {
+                      "id": "500310013#0",
+                      "name": "id",
+                      "required": true,
+                      "description": "池ID",
+                      "type": "integer",
+                      "enable": true,
+                      "schema": {
+                        "type": "integer"
+                      }
+                    },
+                    {
+                      "id": "500310014#0",
+                      "name": "chartId",
+                      "required": true,
+                      "description": "谱面ID",
+                      "type": "integer",
+                      "enable": true,
+                      "schema": {
+                        "type": "integer"
+                      }
+                    }
+                  ]
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "500310015",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "ok": {
+                          "type": "boolean"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "ok"
+                      ]
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": "",
+                    "commonResponseStatus": {
+                      "342355676": true
+                    }
+                  },
+                  {
+                    "id": "500310016",
+                    "referencedResponseId": 342355742
+                  },
+                  {
+                    "id": "500310017",
+                    "referencedResponseId": 342355677
+                  },
+                  {
+                    "id": "500310018",
+                    "referencedResponseId": 342355679
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "none",
+                  "parameters": [],
+                  "required": true,
+                  "mediaType": "",
+                  "examples": [],
+                  "oasExtensions": ""
+                },
+                "description": "登录即可：撤回自己对某张谱面的投稿。已通过审核的无法撤回；撤到没人投之后该条记录会被删除。",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 30,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {
+                  "342355676": true,
+                  "342355742": true,
+                  "342355677": true,
+                  "342355679": true
+                },
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 8371588,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": {},
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "我的投稿",
+              "api": {
+                "id": "500310024",
+                "method": "get",
+                "path": "/api/v1/submission/mine",
+                "parameters": {},
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "500310020",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "ok": {
+                          "type": "boolean"
+                        },
+                        "submissions": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/definitions/500320002"
+                          }
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "ok",
+                        "submissions"
+                      ],
+                      "required": [
+                        "ok",
+                        "submissions"
+                      ]
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": "",
+                    "commonResponseStatus": {
+                      "342355676": true
+                    }
+                  },
+                  {
+                    "id": "500310021",
+                    "referencedResponseId": 342355742
+                  },
+                  {
+                    "id": "500310022",
+                    "referencedResponseId": 342355677
+                  },
+                  {
+                    "id": "500310023",
+                    "referencedResponseId": 342355679
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "none",
+                  "parameters": [],
+                  "required": true,
+                  "mediaType": "",
+                  "examples": [],
+                  "oasExtensions": ""
+                },
+                "description": "登录即可：返回自己在所有池里的投稿记录。",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 40,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {
+                  "342355676": true,
+                  "342355742": true,
+                  "342355677": true,
+                  "342355679": true
+                },
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 8371588,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": {},
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "待审队列",
+              "api": {
+                "id": "500310029",
+                "method": "get",
+                "path": "/api/v1/submission/pending",
+                "parameters": {},
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "500310025",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "ok": {
+                          "type": "boolean"
+                        },
+                        "submissions": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/definitions/500320002"
+                          }
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "ok",
+                        "submissions"
+                      ],
+                      "required": [
+                        "ok",
+                        "submissions"
+                      ]
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": "",
+                    "commonResponseStatus": {
+                      "342355676": true
+                    }
+                  },
+                  {
+                    "id": "500310026",
+                    "referencedResponseId": 342355742
+                  },
+                  {
+                    "id": "500310027",
+                    "referencedResponseId": 342355677
+                  },
+                  {
+                    "id": "500310028",
+                    "referencedResponseId": 342355679
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "none",
+                  "parameters": [],
+                  "required": true,
+                  "mediaType": "",
+                  "examples": [],
+                  "oasExtensions": ""
+                },
+                "description": "管理员：跨池的待审投稿，按投稿时间倒序。",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 50,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {
+                  "342355676": true,
+                  "342355742": true,
+                  "342355677": true,
+                  "342355679": true
+                },
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 8371588,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": {},
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "池的投稿列表",
+              "api": {
+                "id": "500310036",
+                "method": "get",
+                "path": "/api/v1/pool/{id}/submissions",
+                "parameters": {
+                  "path": [
+                    {
+                      "id": "500310030#0",
+                      "name": "id",
+                      "required": true,
+                      "description": "池ID",
+                      "type": "integer",
+                      "enable": true,
+                      "schema": {
+                        "type": "integer"
+                      }
+                    }
+                  ],
+                  "query": [
+                    {
+                      "id": "500310031#0",
+                      "name": "status",
+                      "required": false,
+                      "description": "PENDING / APPROVED / REJECTED，省略则全部",
+                      "type": "string",
+                      "enable": true
+                    }
+                  ]
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "500310032",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "ok": {
+                          "type": "boolean"
+                        },
+                        "submissions": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/definitions/500320002"
+                          }
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "ok",
+                        "submissions"
+                      ],
+                      "required": [
+                        "ok",
+                        "submissions"
+                      ]
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": "",
+                    "commonResponseStatus": {
+                      "342355676": true
+                    }
+                  },
+                  {
+                    "id": "500310033",
+                    "referencedResponseId": 342355742
+                  },
+                  {
+                    "id": "500310034",
+                    "referencedResponseId": 342355677
+                  },
+                  {
+                    "id": "500310035",
+                    "referencedResponseId": 342355679
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "none",
+                  "parameters": [],
+                  "required": true,
+                  "mediaType": "",
+                  "examples": [],
+                  "oasExtensions": ""
+                },
+                "description": "管理员：查看某个池的全部投稿，可用 status 过滤。",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 60,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {
+                  "342355676": true,
+                  "342355742": true,
+                  "342355677": true,
+                  "342355679": true
+                },
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 8371588,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": {},
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "通过投稿",
+              "api": {
+                "id": "500310044",
+                "method": "post",
+                "path": "/api/v1/submission/{poolId}/{chartId}/approve",
+                "parameters": {
+                  "path": [
+                    {
+                      "id": "500310037#0",
+                      "name": "poolId",
+                      "required": true,
+                      "description": "池ID",
+                      "type": "integer",
+                      "enable": true,
+                      "schema": {
+                        "type": "integer"
+                      }
+                    },
+                    {
+                      "id": "500310038#0",
+                      "name": "chartId",
+                      "required": true,
+                      "description": "谱面ID",
+                      "type": "integer",
+                      "enable": true,
+                      "schema": {
+                        "type": "integer"
+                      }
+                    }
+                  ]
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "500310039",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "ok": {
+                          "type": "boolean"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "ok"
+                      ]
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": "",
+                    "commonResponseStatus": {
+                      "342355676": true
+                    }
+                  },
+                  {
+                    "id": "500310040",
+                    "referencedResponseId": 342355742
+                  },
+                  {
+                    "id": "500310041",
+                    "referencedResponseId": 342355677
+                  },
+                  {
+                    "id": "500310042",
+                    "referencedResponseId": 342355679
+                  },
+                  {
+                    "id": "500310043",
+                    "referencedResponseId": 342355680
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "none",
+                  "parameters": [],
+                  "required": true,
+                  "mediaType": "",
+                  "examples": [],
+                  "oasExtensions": ""
+                },
+                "description": "管理员：标记通过并把谱面写入该池（幂等，已在池里则直接通过）。",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 70,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {
+                  "342355676": true,
+                  "342355742": true,
+                  "342355677": true,
+                  "342355679": true
+                },
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 8371588,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": {},
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "拒绝投稿",
+              "api": {
+                "id": "500310052",
+                "method": "post",
+                "path": "/api/v1/submission/{poolId}/{chartId}/reject",
+                "parameters": {
+                  "path": [
+                    {
+                      "id": "500310045#0",
+                      "name": "poolId",
+                      "required": true,
+                      "description": "池ID",
+                      "type": "integer",
+                      "enable": true,
+                      "schema": {
+                        "type": "integer"
+                      }
+                    },
+                    {
+                      "id": "500310046#0",
+                      "name": "chartId",
+                      "required": true,
+                      "description": "谱面ID",
+                      "type": "integer",
+                      "enable": true,
+                      "schema": {
+                        "type": "integer"
+                      }
+                    }
+                  ]
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "500310047",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "ok": {
+                          "type": "boolean"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "ok"
+                      ]
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": "",
+                    "commonResponseStatus": {
+                      "342355676": true
+                    }
+                  },
+                  {
+                    "id": "500310048",
+                    "referencedResponseId": 342355742
+                  },
+                  {
+                    "id": "500310049",
+                    "referencedResponseId": 342355677
+                  },
+                  {
+                    "id": "500310050",
+                    "referencedResponseId": 342355679
+                  },
+                  {
+                    "id": "500310051",
+                    "referencedResponseId": 342355680
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "application/json",
+                  "parameters": [],
+                  "jsonSchema": {
+                    "type": "object",
+                    "properties": {
+                      "reason": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "拒绝理由"
+                      }
+                    },
+                    "x-apifox-orders": [
+                      "reason"
+                    ]
+                  },
+                  "required": true,
+                  "mediaType": "",
+                  "examples": [],
+                  "oasExtensions": ""
+                },
+                "description": "管理员：标记拒绝，可附理由。不会改动谱池内容。",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 80,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {
+                  "342355676": true,
+                  "342355742": true,
+                  "342355677": true,
+                  "342355679": true
+                },
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 8371588,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": {},
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
             }
           ]
         }
@@ -2243,7 +4570,7 @@
           "id": 9308132,
           "name": "房间定义",
           "sidebarTitle": "",
-          "content": "### 房间相关\n\n1. 创建房间之后的谱池将会固化，不可修改，如要修改，需要把房间滚出去重新创建一个\n2. 没有解散房间逻辑，没有\n3. 房间没有人员时，自动销毁\n4. 房间ID定义 `^[A-Za-z0-9_-]{1,20}$`\n5. 默认房间玩家上限 `1000`\n6. 房间类型当前仅 `local`，创建房间时通过 `type` 指定，默认 `local`\n7. 房间配置（minPlayer / maxPlayer / selectCountdown / readyCountdown / forceFinish / interval）可通过更新房间接口按房间调整，selectCountdown 修改后下一轮生效\n8. 房间固化池列表创建后不可修改；当前池每 `interval` 轮在固化列表内按 id 排序循环切换；切换目标必须在该房间固化列表内\n9. 房间当前池的 favorite 展示可被房间级覆盖，不影响全局定义，下一轮生效",
+          "content": "### 房间相关\n\n1. 创建房间之后的谱池将会固化，不可修改，如要修改，需要把房间滚出去重新创建一个\n2. 没有解散房间逻辑，没有\n3. 房间没有人员时，自动销毁\n4. 房间ID定义 `^[A-Za-z0-9_-]{1,20}$`\n5. 默认房间玩家上限 `1000`\n6. 房间类型当前仅 `local`，创建房间时通过 `type` 指定，默认 `local`\n7. 房间配置（minPlayer / maxPlayer / selectCountdown / readyCountdown / forceFinish / interval，其中 interval 仅对未单独设置轮次的池生效）可通过更新房间接口按房间调整，selectCountdown 修改后下一轮生效\n8. 房间固化池列表创建后不可修改；当前池的停留轮数取**池自身的 `roundsPerStay`**，未设置时回退到房间的 `interval`；轮换顺序按池的 `order`，其次按 `id`；切换目标必须在该房间固化列表内\n9. 房间当前池的 favorite 展示可被房间级覆盖，不影响全局定义，下一轮生效\n10. 谱池允许为空（便于先建池再挑谱）；空池在房间创建时会被跳过，服务端启动时只告警不报错",
           "folderId": 0,
           "type": "",
           "tags": [],
@@ -2254,7 +4581,7 @@
           "id": 9308133,
           "name": "权限与管理员",
           "sidebarTitle": "",
-          "content": "### 权限与管理员\n\n1. 玩家与管理员均使用 Phira 账号登录（POST /api/v1/login），服务端验证身份后签发服务器自己的 JWT Bearer Token（有效期 24 小时），响应返回 token 与 isAdmin\n2. 除 login 外的所有接口均使用该 JWT 鉴权（Authorization: Bearer <JWT>），不使用 Phira 下发的 token\n3. 管理员名单由服务器独立配置文件决定，与玩家登录无关\n4. 普通玩家仅可查询自己所在房间的状态与谱池\n5. 创建/删除/配置/强制结束/池管理等写操作均需管理员权限，否则 403\n6. 未登录或 JWT 无效/过期返回 401",
+          "content": "### 权限与管理员\n\n1. 玩家与管理员均使用 Phira 账号登录（POST /api/v1/login），服务端验证身份后签发服务器自己的 JWT Bearer Token（有效期 24 小时），响应返回 token 与 isAdmin\n2. 除 login 外的所有接口均使用该 JWT 鉴权（Authorization: Bearer <JWT>），不使用 Phira 下发的 token\n3. 管理员名单由服务器独立配置文件决定，与玩家登录无关\n4. 普通玩家仅可查询自己所在房间的状态与谱池\n5. 创建/删除/配置/强制结束/池管理等写操作均需管理员权限，否则 403；例外是谱面投稿（见第 8 条）\n6. 未登录或 JWT 无效/过期返回 401\n7. 管理员名单可通过 `/api/v1/admin` 查询与增删（需管理员权限）；服务端拒绝移除最后一名管理员\n8. 谱面投稿是唯一面向普通玩家的写操作：`POST /api/v1/pool/{id}/submissions` 只需登录，但要求该池开启了投稿；其余投稿接口中审核类需要管理员，`/submission/mine` 与 `/submission/open-pools` 只需登录",
           "folderId": 0,
           "type": "",
           "tags": [],
@@ -2810,6 +5137,11 @@
                   "type": "string",
                   "format": "date-time",
                   "description": "谱面内容更新时间戳"
+                },
+                "durationSeconds": {
+                  "type": "integer",
+                  "nullable": true,
+                  "description": "音频时长（秒）。Phira 不提供该字段，由服务端从谱面归档解析，未探测过时为空。"
                 }
               },
               "required": [
@@ -2858,7 +5190,8 @@
                 "ratingCount",
                 "created",
                 "updated",
-                "chartUpdated"
+                "chartUpdated",
+                "durationSeconds"
               ]
             }
           },
@@ -2930,6 +5263,35 @@
                     "type": "integer"
                   },
                   "description": "池内谱面ID列表"
+                },
+                "category": {
+                  "type": "string",
+                  "nullable": true,
+                  "enum": [
+                    "REGULAR",
+                    "CONFIGURED",
+                    "TB",
+                    "MANUAL"
+                  ],
+                  "description": "池类别，决定轮换与展示"
+                },
+                "sizeLimit": {
+                  "type": "integer",
+                  "nullable": true,
+                  "description": "目标容量"
+                },
+                "roundsPerStay": {
+                  "type": "integer",
+                  "nullable": true,
+                  "description": "停留轮数，为空时回退到房间的 interval"
+                },
+                "order": {
+                  "type": "integer",
+                  "description": "轮换顺序，其次按 ID"
+                },
+                "submissionOpen": {
+                  "type": "boolean",
+                  "description": "是否允许玩家向该池投稿"
                 }
               },
               "required": [
@@ -2941,7 +5303,12 @@
                 "id",
                 "favoriteId",
                 "default",
-                "chartIds"
+                "chartIds",
+                "category",
+                "sizeLimit",
+                "roundsPerStay",
+                "order",
+                "submissionOpen"
               ]
             }
           },
@@ -2985,6 +5352,10 @@
                 "refreshIntervalRounds": {
                   "type": "integer",
                   "description": "刷新间隔轮数"
+                },
+                "effectiveRoundsPerStay": {
+                  "type": "integer",
+                  "description": "当前池实际生效的停留轮数：池自身配额优先，否则取房间 interval"
                 }
               },
               "required": [
@@ -2999,7 +5370,8 @@
                 "pendingPoolId",
                 "favoriteId",
                 "finishedRoundsSinceRefresh",
-                "refreshIntervalRounds"
+                "refreshIntervalRounds",
+                "effectiveRoundsPerStay"
               ]
             }
           },
@@ -3055,6 +5427,126 @@
                 "readyCountdown",
                 "forceFinish",
                 "interval"
+              ]
+            }
+          },
+          "visibility": "INHERITED",
+          "moduleId": 8371588
+        },
+        {
+          "name": "投稿人",
+          "displayName": "",
+          "id": "#/definitions/500320001",
+          "description": "",
+          "schema": {
+            "jsonSchema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "type": "integer",
+                  "description": "投稿人的 Phira 用户 ID"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "投稿时冗余保存的用户名，审核时无需再查 Phira"
+                },
+                "at": {
+                  "type": "string",
+                  "format": "date-time",
+                  "nullable": true
+                }
+              },
+              "x-apifox-orders": [
+                "userId",
+                "name",
+                "at"
+              ],
+              "required": [
+                "userId",
+                "name"
+              ]
+            }
+          },
+          "visibility": "INHERITED",
+          "moduleId": 8371588
+        },
+        {
+          "name": "投稿记录",
+          "displayName": "",
+          "id": "#/definitions/500320002",
+          "description": "按「池 + 谱面」聚合。同一张谱面被多人投稿时合并为一条。",
+          "schema": {
+            "jsonSchema": {
+              "type": "object",
+              "properties": {
+                "poolId": {
+                  "type": "integer"
+                },
+                "chartId": {
+                  "type": "integer"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "PENDING",
+                    "APPROVED",
+                    "REJECTED"
+                  ],
+                  "description": "待审 / 已通过 / 已拒绝"
+                },
+                "chart": {
+                  "$ref": "#/definitions/303664780",
+                  "description": "谱面详情，来自服务端索引"
+                },
+                "submitterCount": {
+                  "type": "integer",
+                  "description": "投稿人数"
+                },
+                "submitters": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/500320001"
+                  },
+                  "description": "投稿人列表，按时间先后"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time",
+                  "nullable": true
+                },
+                "reviewedAt": {
+                  "type": "string",
+                  "format": "date-time",
+                  "nullable": true
+                },
+                "reviewerId": {
+                  "type": "integer",
+                  "nullable": true
+                },
+                "reason": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "拒绝理由"
+                }
+              },
+              "x-apifox-orders": [
+                "poolId",
+                "chartId",
+                "status",
+                "chart",
+                "submitterCount",
+                "submitters",
+                "createdAt",
+                "reviewedAt",
+                "reviewerId",
+                "reason"
+              ],
+              "required": [
+                "poolId",
+                "chartId",
+                "status",
+                "submitters",
+                "submitterCount"
               ]
             }
           },
