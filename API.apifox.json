@@ -1216,6 +1216,262 @@
                 "inheritPostProcessors": {},
                 "inheritPreProcessors": {}
               }
+            },
+            {
+              "name": "发送消息到房间",
+              "api": {
+                "id": "900000001",
+                "method": "post",
+                "path": "/api/v1/room/{id}/say",
+                "parameters": {
+                  "path": [
+                    {
+                      "id": "id#0",
+                      "name": "id",
+                      "required": true,
+                      "description": "房间 ID",
+                      "type": "string",
+                      "enable": true,
+                      "schema": {
+                        "type": "string"
+                      }
+                    }
+                  ],
+                  "query": [],
+                  "header": [],
+                  "cookie": []
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "900000001",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "ok": {
+                          "type": "boolean"
+                        },
+                        "delivered": {
+                          "type": "integer"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "ok",
+                        "delivered"
+                      ],
+                      "required": [
+                        "ok"
+                      ]
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": ""
+                  },
+                  {
+                    "id": "342355742",
+                    "referencedResponseId": 342355742
+                  },
+                  {
+                    "id": "342355679",
+                    "referencedResponseId": 342355679
+                  },
+                  {
+                    "id": "342355680",
+                    "referencedResponseId": 342355680
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "application/json",
+                  "description": "",
+                  "jsonSchema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string"
+                      }
+                    },
+                    "x-apifox-orders": [
+                      "message"
+                    ],
+                    "required": [
+                      "message"
+                    ]
+                  },
+                  "examples": [
+                    {
+                      "id": "900000000",
+                      "name": "示例",
+                      "content": "{\"message\": \"本轮比赛将在 5 分钟后开始\"}",
+                      "contentType": "json"
+                    }
+                  ],
+                  "mode": "json"
+                },
+                "description": "以系统消息（发送者 -1）推送给房间内所有玩家与观战者。",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 60,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {
+                  "342355742": true,
+                  "342355679": true,
+                  "342355680": true
+                },
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 8371588,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {},
+                "name": "发送消息到房间"
+              }
+            },
+            {
+              "name": "全服广播",
+              "api": {
+                "id": "900000002",
+                "method": "post",
+                "path": "/api/v1/broadcast",
+                "parameters": {
+                  "path": [],
+                  "query": [],
+                  "header": [],
+                  "cookie": []
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "900000002",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "ok": {
+                          "type": "boolean"
+                        },
+                        "delivered": {
+                          "type": "integer"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "ok",
+                        "delivered"
+                      ],
+                      "required": [
+                        "ok"
+                      ]
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": ""
+                  },
+                  {
+                    "id": "342355742",
+                    "referencedResponseId": 342355742
+                  },
+                  {
+                    "id": "342355679",
+                    "referencedResponseId": 342355679
+                  },
+                  {
+                    "id": "342355680",
+                    "referencedResponseId": 342355680
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "application/json",
+                  "description": "",
+                  "jsonSchema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string"
+                      }
+                    },
+                    "x-apifox-orders": [
+                      "message"
+                    ],
+                    "required": [
+                      "message"
+                    ]
+                  },
+                  "examples": [
+                    {
+                      "id": "900000001",
+                      "name": "示例",
+                      "content": "{\"message\": \"服务器将在 10 分钟后维护\"}",
+                      "contentType": "json"
+                    }
+                  ],
+                  "mode": "json"
+                },
+                "description": "以系统消息推送给当前所有在线玩家。",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 60,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {
+                  "342355742": true,
+                  "342355679": true,
+                  "342355680": true
+                },
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 8371588,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {},
+                "name": "全服广播"
+              }
             }
           ]
         },
@@ -1345,7 +1601,7 @@
                   "examples": [
                     {
                       "mediaType": "application/json",
-                      "value": "{\n    \"email\": \"v9rlnf.q9847@139.com\",\n    \"password\": \"KloX2x3xHDDEn7Z\"\n}"
+                      "value": "{\n    \"email\": \"user@example.com\",\n    \"password\": \"KloX2x3xHDDEn7Z\"\n}"
                     }
                   ],
                   "oasExtensions": ""
@@ -4552,6 +4808,1269 @@
                 "postProcessors": {},
                 "inheritPostProcessors": {},
                 "inheritPreProcessors": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "比赛记录",
+          "id": "900000027",
+          "auth": {},
+          "securityScheme": {},
+          "parentId": 0,
+          "serverId": "",
+          "description": "",
+          "identityPattern": {
+            "httpApi": {
+              "type": "inherit",
+              "bodyType": "",
+              "fields": []
+            }
+          },
+          "shareSettings": {},
+          "visibility": "INHERITED",
+          "moduleId": 8371588,
+          "preProcessors": [
+            {
+              "id": "inheritProcessors",
+              "type": "inheritProcessors",
+              "data": {}
+            }
+          ],
+          "postProcessors": [
+            {
+              "id": "inheritProcessors",
+              "type": "inheritProcessors",
+              "data": {}
+            }
+          ],
+          "inheritPostProcessors": {},
+          "inheritPreProcessors": {},
+          "ordering": 20,
+          "items": [
+            {
+              "name": "比赛记录列表",
+              "api": {
+                "id": "900000003",
+                "method": "get",
+                "path": "/api/v1/record/list",
+                "parameters": {
+                  "path": [],
+                  "query": [
+                    {
+                      "id": "limit#0",
+                      "name": "limit",
+                      "required": false,
+                      "description": "每页条数，默认 50，上限 200",
+                      "type": "integer",
+                      "enable": true,
+                      "schema": {
+                        "type": "integer"
+                      }
+                    },
+                    {
+                      "id": "offset#0",
+                      "name": "offset",
+                      "required": false,
+                      "description": "偏移量，默认 0",
+                      "type": "integer",
+                      "enable": true,
+                      "schema": {
+                        "type": "integer"
+                      }
+                    },
+                    {
+                      "id": "roomId#0",
+                      "name": "roomId",
+                      "required": false,
+                      "description": "按房间 ID 过滤",
+                      "type": "string",
+                      "enable": true,
+                      "schema": {
+                        "type": "string"
+                      }
+                    },
+                    {
+                      "id": "playerId#0",
+                      "name": "playerId",
+                      "required": false,
+                      "description": "只返回该玩家参与过的轮次",
+                      "type": "integer",
+                      "enable": true,
+                      "schema": {
+                        "type": "integer"
+                      }
+                    }
+                  ],
+                  "header": [],
+                  "cookie": []
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "900000003",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "ok": {
+                          "type": "boolean"
+                        },
+                        "result": {
+                          "type": "object",
+                          "properties": {
+                            "total": {
+                              "type": "integer"
+                            },
+                            "records": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "roomId": {
+                                    "type": "string"
+                                  },
+                                  "chartId": {
+                                    "type": "integer"
+                                  },
+                                  "chartName": {
+                                    "type": "string"
+                                  },
+                                  "startedAt": {
+                                    "type": "integer"
+                                  },
+                                  "finishedAt": {
+                                    "type": "integer"
+                                  },
+                                  "results": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "playerId": {
+                                          "type": "integer"
+                                        },
+                                        "playerName": {
+                                          "type": "string"
+                                        },
+                                        "rank": {
+                                          "type": "integer"
+                                        },
+                                        "score": {
+                                          "type": "integer"
+                                        },
+                                        "accuracy": {
+                                          "type": "number"
+                                        },
+                                        "std": {
+                                          "type": "number"
+                                        },
+                                        "gainedPoints": {
+                                          "type": "integer"
+                                        },
+                                        "totalPoints": {
+                                          "type": "integer"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "ok",
+                        "result"
+                      ],
+                      "required": [
+                        "ok"
+                      ]
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": ""
+                  },
+                  {
+                    "id": "342355742",
+                    "referencedResponseId": 342355742
+                  },
+                  {
+                    "id": "342355679",
+                    "referencedResponseId": 342355679
+                  },
+                  {
+                    "id": "342355680",
+                    "referencedResponseId": 342355680
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {},
+                "description": "按结束时间倒序返回已归档的轮次，可按房间或玩家过滤。最多返回 limit 条。",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 60,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {
+                  "342355742": true,
+                  "342355679": true,
+                  "342355680": true
+                },
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 8371588,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {},
+                "name": "比赛记录列表"
+              }
+            },
+            {
+              "name": "单轮成绩",
+              "api": {
+                "id": "900000004",
+                "method": "get",
+                "path": "/api/v1/record/{id}",
+                "parameters": {
+                  "path": [
+                    {
+                      "id": "id#0",
+                      "name": "id",
+                      "required": true,
+                      "description": "记录 ID",
+                      "type": "string",
+                      "enable": true,
+                      "schema": {
+                        "type": "string"
+                      }
+                    }
+                  ],
+                  "query": [],
+                  "header": [],
+                  "cookie": []
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "900000004",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "ok": {
+                          "type": "boolean"
+                        },
+                        "record": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "roomId": {
+                              "type": "string"
+                            },
+                            "chartId": {
+                              "type": "integer"
+                            },
+                            "chartName": {
+                              "type": "string"
+                            },
+                            "startedAt": {
+                              "type": "integer"
+                            },
+                            "finishedAt": {
+                              "type": "integer"
+                            },
+                            "results": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "playerId": {
+                                    "type": "integer"
+                                  },
+                                  "playerName": {
+                                    "type": "string"
+                                  },
+                                  "rank": {
+                                    "type": "integer"
+                                  },
+                                  "score": {
+                                    "type": "integer"
+                                  },
+                                  "accuracy": {
+                                    "type": "number"
+                                  },
+                                  "std": {
+                                    "type": "number"
+                                  },
+                                  "gainedPoints": {
+                                    "type": "integer"
+                                  },
+                                  "totalPoints": {
+                                    "type": "integer"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "ok",
+                        "record"
+                      ],
+                      "required": [
+                        "ok"
+                      ]
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": ""
+                  },
+                  {
+                    "id": "342355742",
+                    "referencedResponseId": 342355742
+                  },
+                  {
+                    "id": "342355679",
+                    "referencedResponseId": 342355679
+                  },
+                  {
+                    "id": "342355680",
+                    "referencedResponseId": 342355680
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {},
+                "description": "返回某一轮的完整成绩、积分与排名。记录 ID 形如 房间ID-时间戳-序号。",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 60,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {
+                  "342355742": true,
+                  "342355679": true,
+                  "342355680": true
+                },
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 8371588,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {},
+                "name": "单轮成绩"
+              }
+            },
+            {
+              "name": "玩家历史成绩",
+              "api": {
+                "id": "900000005",
+                "method": "get",
+                "path": "/api/v1/record/player/{playerId}",
+                "parameters": {
+                  "path": [
+                    {
+                      "id": "playerId#0",
+                      "name": "playerId",
+                      "required": true,
+                      "description": "玩家 ID",
+                      "type": "integer",
+                      "enable": true,
+                      "schema": {
+                        "type": "integer"
+                      }
+                    }
+                  ],
+                  "query": [],
+                  "header": [],
+                  "cookie": []
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "900000005",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "ok": {
+                          "type": "boolean"
+                        },
+                        "result": {
+                          "type": "object",
+                          "properties": {
+                            "playerId": {
+                              "type": "integer"
+                            },
+                            "rounds": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "recordId": {
+                                    "type": "string"
+                                  },
+                                  "roomId": {
+                                    "type": "string"
+                                  },
+                                  "chartId": {
+                                    "type": "integer"
+                                  },
+                                  "chartName": {
+                                    "type": "string"
+                                  },
+                                  "finishedAt": {
+                                    "type": "integer"
+                                  },
+                                  "result": {
+                                    "type": "object",
+                                    "properties": {
+                                      "playerId": {
+                                        "type": "integer"
+                                      },
+                                      "playerName": {
+                                        "type": "string"
+                                      },
+                                      "rank": {
+                                        "type": "integer"
+                                      },
+                                      "score": {
+                                        "type": "integer"
+                                      },
+                                      "accuracy": {
+                                        "type": "number"
+                                      },
+                                      "std": {
+                                        "type": "number"
+                                      },
+                                      "gainedPoints": {
+                                        "type": "integer"
+                                      },
+                                      "totalPoints": {
+                                        "type": "integer"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "ok",
+                        "result"
+                      ],
+                      "required": [
+                        "ok"
+                      ]
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": ""
+                  },
+                  {
+                    "id": "342355742",
+                    "referencedResponseId": 342355742
+                  },
+                  {
+                    "id": "342355679",
+                    "referencedResponseId": 342355679
+                  },
+                  {
+                    "id": "342355680",
+                    "referencedResponseId": 342355680
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {},
+                "description": "返回该玩家参与过的每一轮，按时间倒序。",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 60,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {
+                  "342355742": true,
+                  "342355679": true,
+                  "342355680": true
+                },
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 8371588,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {},
+                "name": "玩家历史成绩"
+              }
+            },
+            {
+              "name": "积分排行榜",
+              "api": {
+                "id": "900000006",
+                "method": "get",
+                "path": "/api/v1/point/ranking",
+                "parameters": {
+                  "path": [],
+                  "query": [
+                    {
+                      "id": "limit#0",
+                      "name": "limit",
+                      "required": false,
+                      "description": "返回条数，默认 50，上限 200",
+                      "type": "integer",
+                      "enable": true,
+                      "schema": {
+                        "type": "integer"
+                      }
+                    }
+                  ],
+                  "header": [],
+                  "cookie": []
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "900000006",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "ok": {
+                          "type": "boolean"
+                        },
+                        "ranking": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "playerId": {
+                                "type": "integer"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "points": {
+                                "type": "integer"
+                              },
+                              "rank": {
+                                "type": "integer"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "ok",
+                        "ranking"
+                      ],
+                      "required": [
+                        "ok"
+                      ]
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": ""
+                  },
+                  {
+                    "id": "342355742",
+                    "referencedResponseId": 342355742
+                  },
+                  {
+                    "id": "342355679",
+                    "referencedResponseId": 342355679
+                  },
+                  {
+                    "id": "342355680",
+                    "referencedResponseId": 342355680
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {},
+                "description": "按累计积分倒序返回排行榜。",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 60,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {
+                  "342355742": true,
+                  "342355679": true,
+                  "342355680": true
+                },
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 8371588,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {},
+                "name": "积分排行榜"
+              }
+            }
+          ]
+        },
+        {
+          "name": "数据导入导出",
+          "id": "900000028",
+          "auth": {},
+          "securityScheme": {},
+          "parentId": 0,
+          "serverId": "",
+          "description": "",
+          "identityPattern": {
+            "httpApi": {
+              "type": "inherit",
+              "bodyType": "",
+              "fields": []
+            }
+          },
+          "shareSettings": {},
+          "visibility": "INHERITED",
+          "moduleId": 8371588,
+          "preProcessors": [
+            {
+              "id": "inheritProcessors",
+              "type": "inheritProcessors",
+              "data": {}
+            }
+          ],
+          "postProcessors": [
+            {
+              "id": "inheritProcessors",
+              "type": "inheritProcessors",
+              "data": {}
+            }
+          ],
+          "inheritPostProcessors": {},
+          "inheritPreProcessors": {},
+          "ordering": 20,
+          "items": [
+            {
+              "name": "导出数据",
+              "api": {
+                "id": "900000020",
+                "method": "get",
+                "path": "/api/v1/data/{kind}/export",
+                "parameters": {
+                  "path": [
+                    {
+                      "id": "kind#0",
+                      "name": "kind",
+                      "required": true,
+                      "description": "数据类型",
+                      "type": "string",
+                      "enable": true,
+                      "schema": {
+                        "type": "string"
+                      }
+                    }
+                  ],
+                  "query": [
+                    {
+                      "id": "kind#1",
+                      "name": "kind",
+                      "required": true,
+                      "description": "数据类型",
+                      "type": "string",
+                      "enable": true,
+                      "schema": {
+                        "type": "string",
+                        "enum": [
+                          "admins",
+                          "pools",
+                          "points",
+                          "records",
+                          "submissions"
+                        ]
+                      }
+                    }
+                  ],
+                  "header": [],
+                  "cookie": []
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "900000020",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "ok": {
+                          "type": "boolean"
+                        },
+                        "result": {
+                          "type": "object"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "ok",
+                        "result"
+                      ],
+                      "required": []
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": ""
+                  },
+                  {
+                    "id": "342355742",
+                    "referencedResponseId": 342355742
+                  },
+                  {
+                    "id": "342355679",
+                    "referencedResponseId": 342355679
+                  },
+                  {
+                    "id": "342355680",
+                    "referencedResponseId": 342355680
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {},
+                "description": "导出指定数据类型的完整 JSON，内容与 data/ 下的文件一致，可用于备份或迁移到另一台服务器。",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 60,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {
+                  "342355742": true,
+                  "342355679": true,
+                  "342355680": true
+                },
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 8371588,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {},
+                "name": "导出数据"
+              }
+            },
+            {
+              "name": "导入数据",
+              "api": {
+                "id": "900000021",
+                "method": "post",
+                "path": "/api/v1/data/{kind}/import",
+                "parameters": {
+                  "path": [
+                    {
+                      "id": "kind#0",
+                      "name": "kind",
+                      "required": true,
+                      "description": "数据类型",
+                      "type": "string",
+                      "enable": true,
+                      "schema": {
+                        "type": "string"
+                      }
+                    }
+                  ],
+                  "query": [
+                    {
+                      "id": "mode#0",
+                      "name": "mode",
+                      "required": false,
+                      "description": "merge 或 replace，默认 merge",
+                      "type": "string",
+                      "enable": true,
+                      "schema": {
+                        "type": "string"
+                      }
+                    }
+                  ],
+                  "header": [],
+                  "cookie": []
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "900000021",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "ok": {
+                          "type": "boolean"
+                        },
+                        "imported": {
+                          "type": "integer"
+                        },
+                        "total": {
+                          "type": "integer"
+                        },
+                        "backup": {
+                          "type": "string"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "ok",
+                        "imported",
+                        "total",
+                        "backup"
+                      ],
+                      "required": [
+                        "ok"
+                      ]
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": ""
+                  },
+                  {
+                    "id": "342355742",
+                    "referencedResponseId": 342355742
+                  },
+                  {
+                    "id": "342355679",
+                    "referencedResponseId": 342355679
+                  },
+                  {
+                    "id": "342355680",
+                    "referencedResponseId": 342355680
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "application/json",
+                  "description": "",
+                  "jsonSchema": {
+                    "type": "object",
+                    "properties": {
+                      "kind": {
+                        "type": "string",
+                        "enum": [
+                          "admins",
+                          "pools",
+                          "points",
+                          "records",
+                          "submissions"
+                        ]
+                      },
+                      "content": {
+                        "type": "string"
+                      }
+                    },
+                    "x-apifox-orders": [
+                      "kind",
+                      "content"
+                    ],
+                    "required": []
+                  },
+                  "examples": [
+                    {
+                      "id": "900000020",
+                      "name": "示例",
+                      "content": "{\"kind\": \"pools\"}",
+                      "contentType": "json"
+                    }
+                  ],
+                  "mode": "json"
+                },
+                "description": "导入指定数据类型的 JSON。merge 模式按主键合并，replace 模式整体覆盖。导入前自动备份旧数据。",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 60,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {
+                  "342355742": true,
+                  "342355679": true,
+                  "342355680": true
+                },
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 8371588,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {},
+                "name": "导入数据"
+              }
+            },
+            {
+              "name": "备份列表",
+              "api": {
+                "id": "900000022",
+                "method": "get",
+                "path": "/api/v1/data/{kind}/backups",
+                "parameters": {
+                  "path": [
+                    {
+                      "id": "kind#0",
+                      "name": "kind",
+                      "required": true,
+                      "description": "数据类型",
+                      "type": "string",
+                      "enable": true,
+                      "schema": {
+                        "type": "string"
+                      }
+                    }
+                  ],
+                  "query": [],
+                  "header": [],
+                  "cookie": []
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "900000022",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "ok": {
+                          "type": "boolean"
+                        },
+                        "backups": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "ok",
+                        "backups"
+                      ],
+                      "required": [
+                        "ok"
+                      ]
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": ""
+                  },
+                  {
+                    "id": "342355742",
+                    "referencedResponseId": 342355742
+                  },
+                  {
+                    "id": "342355679",
+                    "referencedResponseId": 342355679
+                  },
+                  {
+                    "id": "342355680",
+                    "referencedResponseId": 342355680
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {},
+                "description": "返回导入时自动生成的备份文件名，按时间倒序。",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 60,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {
+                  "342355742": true,
+                  "342355679": true,
+                  "342355680": true
+                },
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 8371588,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {},
+                "name": "备份列表"
+              }
+            },
+            {
+              "name": "恢复备份",
+              "api": {
+                "id": "900000023",
+                "method": "post",
+                "path": "/api/v1/data/{kind}/restore",
+                "parameters": {
+                  "path": [
+                    {
+                      "id": "kind#0",
+                      "name": "kind",
+                      "required": true,
+                      "description": "数据类型",
+                      "type": "string",
+                      "enable": true,
+                      "schema": {
+                        "type": "string"
+                      }
+                    }
+                  ],
+                  "query": [],
+                  "header": [],
+                  "cookie": []
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {
+                  "query": [],
+                  "body": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "responses": [
+                  {
+                    "id": "900000023",
+                    "code": 200,
+                    "name": "成功",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {
+                        "ok": {
+                          "type": "boolean"
+                        },
+                        "imported": {
+                          "type": "integer"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "ok",
+                        "imported"
+                      ],
+                      "required": [
+                        "ok"
+                      ]
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": ""
+                  },
+                  {
+                    "id": "342355742",
+                    "referencedResponseId": 342355742
+                  },
+                  {
+                    "id": "342355679",
+                    "referencedResponseId": 342355679
+                  },
+                  {
+                    "id": "342355680",
+                    "referencedResponseId": 342355680
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "application/json",
+                  "description": "",
+                  "jsonSchema": {
+                    "type": "object",
+                    "properties": {
+                      "backup": {
+                        "type": "string"
+                      }
+                    },
+                    "x-apifox-orders": [
+                      "backup"
+                    ],
+                    "required": [
+                      "backup"
+                    ]
+                  },
+                  "examples": [
+                    {
+                      "id": "900000022",
+                      "name": "示例",
+                      "content": "{\"backup\": \"pools-20261005-154623-314.json\"}",
+                      "contentType": "json"
+                    }
+                  ],
+                  "mode": "json"
+                },
+                "description": "把某个备份文件恢复为当前数据。",
+                "tags": [],
+                "status": "developing",
+                "serverId": "",
+                "operationId": "",
+                "sourceUrl": "",
+                "ordering": 60,
+                "cases": [],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {
+                  "342355742": true,
+                  "342355679": true,
+                  "342355680": true
+                },
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 8371588,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {},
+                "name": "恢复备份"
               }
             }
           ]
